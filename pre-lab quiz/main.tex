@@ -1,0 +1,195 @@
+\documentclass[footheight=20pt, footsepline, headheight=20pt, headsepline]{scrartcl}
+%
+\usepackage[utf8]{inputenc} % below are various important packages
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[english]{babel}
+\usepackage{textcomp} 
+\usepackage{amsmath}
+\usepackage{mathrsfs}
+\usepackage{latexsym}
+\usepackage{amssymb}	
+\usepackage{amsfonts}
+\usepackage{theorem}
+\usepackage{graphicx}
+\usepackage{scrlayer-scrpage}
+\usepackage{xcolor}
+\usepackage{setspace}
+\usepackage{framed}
+\usepackage{hyperref} 
+\usepackage{pgf,tikz,pgfplots} % possibility to insert geogebra graphs
+\usepackage{mathrsfs}
+\pgfplotsset{compat=1.15}\usetikzlibrary{arrows} % part of geogebra package
+\usepackage{qrcode} % insert qr codes
+\usepackage{multicol}
+\usepackage{multirow}
+\usepackage{xurl}
+\usepackage{tabularx}
+\usepackage{enumitem}
+\usepackage{float}
+
+% Add to length for wider margins
+\addtolength{\textwidth}{3cm} % right to margin
+\addtolength{\hoffset}{-1.6cm} % left to margin
+\addtolength{\voffset}{-2cm} % to top
+\addtolength{\textheight}{6.5cm} % to bottom
+
+% Headers-Footers
+\definecolor{gro}{gray}{0.6} % define color
+\setkomafont{pagehead}{\normalfont\sffamily} % define header
+\setkomafont{pagefoot}{\normalfont\sffamily} % define footer
+\addtokomafont{headsepline}{\color{gro}} % define header horizontal line
+\addtokomafont{footsepline}{\color{gro}} % define footer horizontal line
+	\ihead{\color{gro} PHY324} % header (i=inner=left)
+	\chead{\color{gro} Thermal Diffusivity} % header (c=center)
+	\ohead{\color{gro} Emre Alca, 1005756193} % header (o=outer=right)
+	\ifoot{\color{gro} } % footer (i=inner=left)
+	\cfoot{\color{gro} - {\textbf\thepage} -} % footer (c=center)
+	\ofoot{\color{gro} } % footer (o=outer=right)
+
+
+%%\renewcommand{\sfdefault{}} % font
+\linespread{1.2} % increase line spacing
+
+%Setting folder to import images
+
+%Setting Paragraphs 
+\setlength\parindent{0pt}
+
+\everymath{\displaystyle}
+
+% \newcommand{\declarecommand}[1]{\providecommand{#1}{}\renewcommand{#1}}
+% \declarecommand{\ds}{\displaystyle}
+
+
+\begin{document}
+
+%TITLE
+\noindent {\textbf{\Large{PHY324 Pre-Lab  ---  Jan 24, 2023}}}
+
+\normalsize 
+
+
+%STUDENT NUMBER
+\noindent {Emre R. Alca}
+\noindent {1005756193}
+
+%---------------------------------------------------------------------------
+%SECTION OUTLINING
+
+\noindent\hrulefill
+%---------------------------------------------------------------------------
+%---------------------------------------------------------------------------
+
+
+\textbf{\section*{Q1. What experiment are you doing?}}
+% \textbf{question text}
+
+\noindent\hrulefill
+
+Thermal Diffusivity
+
+%---------------------------------------------------------------------------
+%---------------------------------------------------------------------------
+\textbf{\section*{Q2. Summarize the physics elements in this experiment.}}
+% \textbf{question text}
+
+\noindent\hrulefill
+
+The rate of change of the thermal energy is equal to the amound of energy excaping through the surface (essentialy, this is the flux $ \frac{d}{dt} \int_V \rho e dV = - \int_S \vec{q} \cdot \vec{n} dS$)
+
+The temperature at the surface of the insulated thermometer is assumed to be instantaneously equal to the temperature of the bath
+
+There is a phase delay (the amount of time it takes for the insulated thermometer to equalize with the temperature of the bath)
+
+We can use Bessel functions to extract this phase delay, and relate it to $m$.
+
+How do we get to this phase delay? We start with the equation for temperature as a function of the radius of the insulator and time $T(r,t) = R(r) e^{i \omega t}$.
+
+Since we have radial symmetry, we can use make the expression for 
+\[
+	\frac{d^2 R}{dr^2} + \frac{1}{r} \frac{d R}{d r} + \lambda^2 R = 0
+\]
+where the solution to $\lambda = i\omega/m$ is 
+\[
+	R(r) = A J_0 (\lambda r)
+\]
+and $J_0$ is the $0^{th}$ degree Bessel function and $A$ is some amplutude.
+\[
+	J_0(r) = A \sum_{n=0}^{\infty} \frac{(-1)^n}{(n!)^2}\left( \frac{\lambda r}{2} \right)^{2n}
+\]
+To establish a relationship to $m$, we take $J_0(z)$ where $z=[\sqrt{\omega/m} r]e^{-i \pi/4}$
+This splits $J_0$ into a real and complex componant 
+\[
+	J_0(z) = \text{ber}_0(z) + i \text{ber}_0(z)
+\]
+and we can take use
+\[
+	\tan(\phi) = \frac{\text{bei}_0(z)}{\text{ber}_0(z)}.
+\]
+
+We can find $\phi$ by plotting $\text{ber}_0(z) + i \text{ber}_0(z)$ and using the phase curves to find $r \sqrt{\omega/m}$ and extrapolate $m$.
+
+
+%---------------------------------------------------------------------------
+%---------------------------------------------------------------------------
+\textbf{\section*{Q3. Describe one major goal of the lab.}}
+% \textbf{question text}
+
+\noindent\hrulefill
+
+To determine the thermal diffusivity coefficient
+\[
+	m = \frac{\kappa}{\rho \gamma}
+\]
+by measuring the appropriate phase delays from the input (bath) temperature and output (insulated) temperature.
+
+%---------------------------------------------------------------------------
+%---------------------------------------------------------------------------
+\textbf{\section*{Q4. What do you measure directly in pursuit of the major goal described above?}}
+% \textbf{question text}
+
+\noindent\hrulefill
+
+The time of each transition between the hot and cold baths and whether that transition is from hot-to-cold or cold-to-hot.
+
+The internal temperature of the insulated thermometer at each transition.
+
+The internal Temperatuer of the insulated thermometer at each transition.
+
+%---------------------------------------------------------------------------
+%---------------------------------------------------------------------------
+
+\textbf{\section*{Q5. Outline how you get the answer to Q3 from the data collected as described in Q4.}}
+\textbf{If you will graph data to achieve the goal in Q3 then explain what you will graph, what the trend-line will look like, and how it achieves the goal in Q3. Include any equations you will use to turn the data described in Q4 into the answer described in Q3.}
+
+\noindent\hrulefill
+
+we measure $\phi$ by plotting the $\text{ber}_0 (z) + i \text{bei}(z)$ for our measured $z$.
+The phase curves allow us to find $r \sqrt{\omega/m}$ andd thus, $m$.
+
+We will plot the square wave of the input temperatures and overlay the measured temperatures. 
+We will also plot $\tan(\phi)$ in the complex plane, as well as $J_0$ on the real number line.
+
+We can use curve\_fit on $J_0 (z)$ to allow us to find the relation for $m$.
+
+%---------------------------------------------------------------------------
+%---------------------------------------------------------------------------
+
+% \textbf{\section*{Q1. question title}}
+% \textbf{question text}
+
+% \noindent\hrulefill
+
+% \textbf{(a) part a quesiton text}
+
+% \noindent\hrulefill
+
+%---------------------------------------------------------------------------
+
+%---------------------------------------------------------------------------
+% \begin{center}
+%     \includegraphics[width = .8\textwidth]{Q6.png}
+% \end{center}
+%---------------------------------------------------------------------------
+\end{document}
