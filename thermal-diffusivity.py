@@ -1,6 +1,10 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+import scipy.optimize as op
+import scipy.special as sp
+
+
 
 def get_wave_from_csv(file):
     """Parses .csv files in the expected format and returns a list of np.array's holding
@@ -33,6 +37,37 @@ def get_wave_from_csv(file):
             T_S[i] = T_I[0]
     return [t,T_I, T_S]
 
+
+def J_0 (x, A, f):
+    """real componant of the bessel function
+
+    Args:
+        x (np.array): x data
+        A (float): amplitude
+        f (float): frequency
+    """
+    k = 50
+    J = 0
+    for i in range(k):
+        J = A*(((-1)**i)/(sp.factorial(i))**2)*((x**2)/(4*f))**i + ber
+    return J
+
+def ber_0(x, A, f, offset):
+    """real componant of the bessel function
+
+    Args:
+        x (np.array): x data
+        A (float): amplitude
+        f (float): frequency
+    """
+    k = 10
+    ber = 0
+    for i in range(k):
+        ber += ((np.cos((i * np.pi)/2))/(sp.factorial(i))**2)*((x**2)/(4*f))**i     # calculate bessel function, f = omega*r**3/m
+    ber = (A*ber) + offset                                                        # multiple the bessel function by some amplitude (A) and add some vertical offset (offset)
+    return ber
+
+
 if __name__ == "__main__":
 
     trial1 = get_wave_from_csv(r'trial1.csv')
@@ -46,6 +81,8 @@ if __name__ == "__main__":
 
     axs= [ax1, ax2, ax3]
 
+    p0s=[()]
+
     for i in range(3):
         trial_label = rf'trial{i+1}'
         # print(trial_label)
@@ -55,7 +92,17 @@ if __name__ == "__main__":
         # print(trial)
         axs[i].plot(trial[0], trial[1], label='T_I')
         axs[i].plot(trial[0], trial[2], label='T_S')
+        popt, pcov = op.curve_fit(ber_0, trial[0], trial[1], p0=(10, 600, 50))
+        print(popt)
+        axs[i].plot(trial[0], ber_0(trial[0], popt[0], popt[1], popt[2]), label='bessel function')
+
         axs[i].legend(loc=1)
-        
 
 plt.show()
+
+
+# xx=np.linspace(0, 30, 100)
+# fig, (ax1) = plt.subplots(1,1)
+# ax1.plot(xx, ber_0(xx, 1, 20, 50), label='bessel function')
+# ax1.legend(loc='upper right')
+# plt.show()
