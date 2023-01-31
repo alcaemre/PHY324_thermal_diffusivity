@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.2.20)  31 JAN 2023 14:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (TeX Live 2021) (preloaded format=pdflatex 2022.2.20)  31 JAN 2023 14:50
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -812,10 +812,15 @@ LaTeX Font Info:    Trying to load font information for OT1+qag on input line 93
 (/usr/local/texlive/2021/texmf-dist/tex/latex/tex-gyre/ot1qag.fd
 File: ot1qag.fd 2009/09/25 v1.2 font definition file for OT1/qag
 )
-LaTeX Font Info:    Trying to load font information for OT1+qpl on input line 108.
+LaTeX Font Info:    Trying to load font information for OT1+qpl on input line 109.
  (/usr/local/texlive/2021/texmf-dist/tex/latex/tex-gyre/ot1qpl.fd
 File: ot1qpl.fd 2009/09/25 v1.2 font definition file for OT1/qpl
-) [1
+)
+Underfull \hbox (badness 10000) in paragraph at lines 109--110
+
+ []
+
+[1
 
 {/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [2] (/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.aux)
 Package rerunfilecheck Info: File `thermal-diffusivity.out' has not changed.
@@ -824,13 +829,13 @@ Package rerunfilecheck Info: File `thermal-diffusivity.out' has not changed.
 Here is how much of TeX's memory you used:
  33199 strings out of 478994
  761326 string characters out of 5858184
- 1395013 words of memory out of 5000000
+ 1394993 words of memory out of 5000000
  50112 multiletter control sequences out of 15000+600000
  417625 words of font info for 34 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  87i,5n,88p,818b,609s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc}</usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/tex-gyre/qagb.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/tex-gyre/qagr.pfb></usr/local/texlive/2021/texmf-dist/fonts/type1/public/tex-gyre/qplr.pfb>
-Output written on /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf (2 pages, 132155 bytes).
+Output written on /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf (2 pages, 132837 bytes).
 PDF statistics:
  37 PDF objects out of 1000 (max. 8388607)
  28 compressed objects within 1 object stream

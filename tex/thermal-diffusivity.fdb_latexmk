@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1675194211 "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.tex" "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf" "thermal-diffusivity" 1675194214
-  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.aux" 1675194213 686 4ce905362b6645b598ea182482e9aeed ""
-  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.tex" 1675194211 2515 432ee71b3cbef11ae46bbdbbad3707c1 ""
+["pdflatex"] 1675194606 "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.tex" "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf" "thermal-diffusivity" 1675194608
+  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.aux" 1675194608 686 4ce905362b6645b598ea182482e9aeed ""
+  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.tex" 1675194605 2680 b8822f02b37d9d9cd44cf136e76146c2 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc" 1529098226 2409 c64dab22331c83731e970f6020b4448b ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmr10.tfm" 1136768653 1296 45809c5a464d5f32c8f98ba97c1bb47f ""
@@ -214,13 +214,13 @@
   "/usr/local/texlive/2021/texmf-var/fonts/map/pdftex/updmap/pdftex.map" 1616695603 5169178 a2ce6e2d73f603b690db6777d06dbccb ""
   "/usr/local/texlive/2021/texmf-var/web2c/pdftex/pdflatex.fmt" 1645404801 2724735 10efd6a0e64a344575da7331b8ab3837 ""
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
-  "thermal-diffusivity.aux" 1675194213 686 4ce905362b6645b598ea182482e9aeed "pdflatex"
-  "thermal-diffusivity.out" 1675194213 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "thermal-diffusivity.tex" 1675194211 2515 432ee71b3cbef11ae46bbdbbad3707c1 ""
+  "thermal-diffusivity.aux" 1675194608 686 4ce905362b6645b598ea182482e9aeed "pdflatex"
+  "thermal-diffusivity.out" 1675194608 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+  "thermal-diffusivity.tex" 1675194605 2680 b8822f02b37d9d9cd44cf136e76146c2 ""
   (generated)
+  "thermal-diffusivity.out"
+  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.log"
+  "thermal-diffusivity.pdf"
+  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf"
   "thermal-diffusivity.aux"
   "thermal-diffusivity.log"
-  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.log"
-  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf"
-  "thermal-diffusivity.out"
-  "thermal-diffusivity.pdf"
