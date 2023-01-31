@@ -1,0 +1,104 @@
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{mathtools}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{enumerate}
+\usepackage{enumitem}
+\usepackage{verbatim}
+\usepackage{indentfirst}
+\usepackage[hidelinks]{hyperref} %no boxes around links
+\usepackage{xcolor}
+\usepackage{alltt}
+\usepackage{textcomp}
+\usepackage[margin=1in]{geometry}
+\usepackage{esvect}
+\usepackage{titlesec}
+\usepackage{braket}
+\usepackage{tensor}
+\usepackage{cancel}
+\usepackage{color}
+\usepackage{wrapfig}
+\usepackage{subfig}
+\usepackage{float}
+\usepackage[figurename=]{caption} %allows to write labeless-figure number captions
+\usepackage{sidecap}
+\usepackage{graphics}
+
+
+
+%note to self: 'bbold' package ruins real number notation
+% \usepackage{fancyhdr}
+% \pagestyle{fancy} 
+% \renewcommand{\headrulewidth}{0pt} %remove bottom lines of headers
+% \renewcommand{\footrulewidth}{0pt}
+
+
+
+    %tikz packages
+\usepackage{tikz}
+\usepackage{pgfplots}
+\usetikzlibrary{pgfplots.polar}
+\usetikzlibrary{decorations.markings} 
+
+
+    %write all math in ds
+\everymath{\displaystyle}
+    %allow pagebreaks during displaystyle
+\allowdisplaybreaks
+
+    %define new commands
+\newcommand{\declarecommand}[1]{\providecommand{#1}{}\renewcommand{#1}}
+\declarecommand{\ds}{\displaystyle}
+\declarecommand{\nd}{\noindent}
+\declarecommand{\phi}{\varphi}
+\declarecommand{\epsilon}{\varepsilon}
+\declarecommand{\R}{\mathbb{R}}
+\declarecommand{\del}{\partial}
+\declarecommand{\d}{\delta}
+\declarecommand{\l}{\ell}
+\declarecommand{\L}{\mathcal{L}}
+\declarecommand{\J}{\mathcal{J}}
+
+\DeclareMathOperator{\sech}{sech}
+
+
+\titleformat{\section}{\large\scshape\raggedright}{}{0em}{} % Section formatting
+
+
+
+    %tag form for hyperrefs
+\newtagform{blue}{\color{blue}(}{)}
+
+
+
+
+%fancy r
+\usepackage{calligra}
+\DeclareMathAlphabet{\mathcalligra}{T1}{calligra}{m}{n}
+\DeclareFontShape{T1}{calligra}{m}{n}{<->s*[2.2]callig15}{}
+
+\newcommand{\scripty}[1]{\ensuremath{\mathcalligra{#1}}}
+
+\titleformat{\section}{\large\scshape\raggedright}{}{0em}{} % Section formatting
+
+
+
+\begin{document}
+
+\begin{center}
+    \Large \fontfamily{qag}  \textbf{Thermal Diffusivity of Tortured Rubber}\\
+    \vspace{5pt} 
+    \large PHY324\\
+    \vspace{5pt}
+    Emre Alca - , Jace Alloway - 1006940802
+\end{center}
+
+\nd \hrulefill
+
+\vspace{15pt}
+
+
+
+\end{document}
