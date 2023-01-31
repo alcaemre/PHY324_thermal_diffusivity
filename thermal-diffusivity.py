@@ -142,8 +142,8 @@ if __name__ == "__main__":
 
 
 
-# xx=np.linspace(0, 30, 100)
-# fig, (ax1) = plt.subplots(1,1)
-# ax1.plot(xx, ber_0(xx, 1, 20, 50), label='bessel function')
-# ax1.legend(loc='upper right')
-# plt.show()
+xx=np.linspace(0, 30, 100)
+fig, (ax1) = plt.subplots(1,1)
+ax1.plot(xx, ber_0(xx, 1, 20, 50), label='bessel function')
+ax1.legend(loc='upper right')
+plt.show()
