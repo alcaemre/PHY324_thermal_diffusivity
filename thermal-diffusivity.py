@@ -42,7 +42,7 @@ def get_wave_from_csv(file):
     return [t,T_I, T_S]
 
 
-def J_0 (x, A, f):
+def J_0 (x, A, f, offset):
     """real componant of the bessel function
 
     Args:
@@ -53,7 +53,8 @@ def J_0 (x, A, f):
     k = 50
     J = 0
     for i in range(k):
-        J += A*(((-1)**i)/(sp.factorial(i))**2)*((x**2)/(4*f))**i
+        J += (((-1)**i)/(sp.factorial(i))**2)*((x**2)/(4*f))**i
+    J = A*J + offset
     return J
 
 def ber_0(x, A, f, offset):
@@ -71,6 +72,24 @@ def ber_0(x, A, f, offset):
     ber = (A*ber) + offset                                                      # multiple the bessel function by some amplitude (A) and add some vertical offset (offset)
     return ber
 
+
+
+def ber_i(x, A, f, offset):
+    """real componant of the bessel function
+
+    Args:
+        x (np.array): x data
+        A (float): amplitude
+        f (float): frequency
+    """
+    k = 10
+    ber = 0
+    for i in range(k):
+        ber += ((np.sin((i * np.pi)/2))/(sp.factorial(i))**2)*((x**2)*f)**i     # calculate bessel function, f = m/(omega*(r**2))
+    ber = (A*ber) + offset                                                      # multiple the bessel function by some amplitude (A) and add some vertical offset (offset)
+    return ber
+
+
 def find_optimal_params(trial):
     A_s = np.linspace(0, 20, 20)
     f_s = np.linspace(10, 100000, 20)
@@ -87,7 +106,7 @@ def find_optimal_params(trial):
                 sys.stdout.write('\r'+'calculating . . .  '+chars[chars_i % 4]) # animating output to show that function is running
                 chars_i += 1
                 
-                popt, pcov = op.curve_fit(ber_0, trial[0], trial[1])
+                popt, pcov = op.curve_fit(J_0, trial[0], trial[1])
                 perr = np.sqrt(np.diag(pcov))[0]
                 # print(perr)
                 perrs.append(perr)
@@ -114,36 +133,64 @@ if __name__ == "__main__":
 
         axs= [ax1, ax2, ax3]
 
-        p0s=[(20.0, 100000.0, 70.0), (20.0, 100000.0, 70.0), (10, 10000000, 50)]
+        p0s=[(15.0, 400.0, 25.0), (20.0, 45.0, 70.0), (15, 400, 65)]
 
         for i in range(3):
-            trial_label = rf'trial{i+1}'
-            # print(trial_label)
-            axs[i].set_title(trial_label)
+        #     trial_label = rf'trial{i+1}'
+        #     # print(trial_label)
+        #     axs[i].set_title(trial_label)
 
-            trial = get_wave_from_csv(trial_label+'.csv')
-            # print(trial)
-            axs[i].plot(trial[0], trial[1], label='T_I')
-            axs[i].plot(trial[0], trial[2], label='T_S')
-            popt, pcov = op.curve_fit(ber_0, trial[0], trial[1], p0=p0s[i])
+        #     trial = get_wave_from_csv(trial_label+'.csv')
+        #     # print(trial)
+        #     axs[i].plot(trial[0], trial[1], label='T_I')
+        #     axs[i].plot(trial[0], trial[2], label='T_S')
+        #     popt, pcov = op.curve_fit(J_0, trial[0], trial[1], p0=p0s[i])
+        #     print(popt)
+        #     #print(pcov**2)
+        #     axs[i].plot(trial[0], J_0(trial[0], popt[0], popt[1], popt[2]), label='bessel function')
+
+        #     axs[i].legend(loc='upper right')
+
+            
+            trial1 = get_wave_from_csv('trial1.csv')
+            trial2 = get_wave_from_csv('trial2.csv')
+            trial3 = get_wave_from_csv('trial3.csv')
+
+        axs[0].set_title('trial 1')
+        axs[0].plot(trial1[0], trial1[1], label='T_I')
+        axs[0].plot(trial1[0], trial1[2], label='T_S')
+        popt1, pcov1 = op.curve_fit(J_0, trial1[0], trial1[1], p0=p0s[0])
             # print(popt)
-            print(pcov**2)
-            axs[i].plot(trial[0], ber_0(trial[0], popt[0], popt[1], popt[2]), label='bessel function')
+            # print(pcov3**2)
+        axs[0].plot(trial1[0], (1.2**(trial1[0]/700))*J_0(trial1[0], popt1[0], popt1[1], 0)+20*np.sin(trial1[0]/400)-14+popt1[2], label='bessel fit')
+        axs[0].legend(loc='upper right')
 
-            axs[i].legend(loc=3)
 
+    #sinusoidal fitting attempt
+        axs[2].set_title('trial 3 - sinusoidal superposition')
+        axs[2].plot(trial3[0], trial3[1], label='T_I')
+        axs[2].plot(trial3[0], trial3[2], label='T_S')
+        popt3, pcov3 = op.curve_fit(J_0, trial3[0], trial3[1], p0=p0s[2]) #curve_fit
+            # print(popt)
+            # print(pcov3**2)
+        #plotting the curve fit bessel function
+        axs[2].plot(trial3[0], (2**(trial3[0]/700))*J_0(trial3[0], popt3[0], popt3[1], 0)-20*np.sin(trial3[0]/400)+popt3[2]+10, label='bessel fit')
+        axs[2].legend(loc='upper right')
+
+
+
+
+        plt.subplots_adjust(hspace=0.5)
         plt.show()
 
-    # automating f**king around for parameters
-    if optimizing:
-        trial = get_wave_from_csv(rf'trial3.csv')
-        print(find_optimal_params(trial))
 
 
 
 
-xx=np.linspace(0, 30, 100)
-fig, (ax1) = plt.subplots(1,1)
-ax1.plot(xx, ber_0(xx, 1, 20, 50), label='bessel function')
-ax1.legend(loc='upper right')
+# xx=np.linspace(30, 300, 100)
+# fig, (ax1) = plt.subplots(1,1)
+# # ax1.plot(xx, J_0(xx, 2, 60), label='bessel function')
+# ax1.legend(loc='upper right')
+# ax1.set_xlim(0, 300)
+
 plt.show()
