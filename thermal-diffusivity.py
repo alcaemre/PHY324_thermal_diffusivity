@@ -133,10 +133,8 @@ if __name__ == "__main__":
 
         axs= [ax1, ax2, ax3]
 
+        p0s=[(15.0, 400.0, 25.0), (20.0, 45.0, 70.0), (15, 400, 65)]
 <<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> fitting the  first and third trials
         p0s=[(15.0, 400.0, 25.0), (20.0, 45.0, 70.0), (15, 400, 65)]
 
         for i in range(3):
@@ -168,7 +166,31 @@ if __name__ == "__main__":
             # print(pcov3**2)
         axs[0].plot(trial1[0], (1.2**(trial1[0]/700))*J_0(trial1[0], popt1[0], popt1[1], 0)+20*np.sin(trial1[0]/400)-14+popt1[2], label='bessel fit')
         axs[0].legend(loc='upper right')
-<<<<<<< HEAD
+
+
+    #sinusoidal fitting attempt
+        axs[2].set_title('trial 3 - sinusoidal superposition')
+        axs[2].plot(trial3[0], trial3[1], label='T_I')
+        axs[2].plot(trial3[0], trial3[2], label='T_S')
+        popt3, pcov3 = op.curve_fit(J_0, trial3[0], trial3[1], p0=p0s[2]) #curve_fit
+            # print(popt)
+            # print(pcov3**2)
+        #plotting the curve fit bessel function
+        axs[2].plot(trial3[0], (2**(trial3[0]/700))*J_0(trial3[0], popt3[0], popt3[1], 0)-20*np.sin(trial3[0]/400)+popt3[2]+10, label='bessel fit')
+
+            
+            trial1 = get_wave_from_csv('trial1.csv')
+            trial2 = get_wave_from_csv('trial2.csv')
+            trial3 = get_wave_from_csv('trial3.csv')
+
+        axs[0].set_title('trial 1')
+        axs[0].plot(trial1[0], trial1[1], label='T_I')
+        axs[0].plot(trial1[0], trial1[2], label='T_S')
+        popt1, pcov1 = op.curve_fit(J_0, trial1[0], trial1[1], p0=p0s[0])
+            # print(popt)
+            # print(pcov3**2)
+        axs[0].plot(trial1[0], (1.2**(trial1[0]/700))*J_0(trial1[0], popt1[0], popt1[1], 0)+20*np.sin(trial1[0]/400)-14+popt1[2], label='bessel fit')
+        axs[0].legend(loc='upper right')
 =======
         p0s=[(20.0, 60000.0, 70.0), (20.0, 45.0, 70.0), (10, 60, 50)]
 
@@ -189,10 +211,6 @@ if __name__ == "__main__":
 
 
 <<<<<<< HEAD
-=======
-
-
->>>>>>> fitting the  first and third trials
     #sinusoidal fitting attempt
         axs[2].set_title('trial 3 - sinusoidal superposition')
         axs[2].plot(trial3[0], trial3[1], label='T_I')
@@ -204,10 +222,6 @@ if __name__ == "__main__":
         axs[2].plot(trial3[0], (2**(trial3[0]/700))*J_0(trial3[0], popt3[0], popt3[1], 0)-20*np.sin(trial3[0]/400)+popt3[2]+10, label='bessel fit')
         axs[2].legend(loc='upper right')
 
-<<<<<<< HEAD
-=======
-
->>>>>>> fitting the  first and third trials
 
 
 
@@ -219,28 +233,12 @@ if __name__ == "__main__":
 
 
 
-<<<<<<< HEAD
     #try to initialize input from another phase difference
 
-<<<<<<< HEAD
-=======
-
->>>>>>> fitting the  first and third trials
 # xx=np.linspace(30, 300, 100)
 # fig, (ax1) = plt.subplots(1,1)
 # # ax1.plot(xx, J_0(xx, 2, 60), label='bessel function')
 # ax1.legend(loc='upper right')
 # ax1.set_xlim(0, 300)
-=======
-
-
-
-
-xx=np.linspace(30, 300, 100)
-fig, (ax1) = plt.subplots(1,1)
-ax1.plot(xx, J_0(xx, 2, 60), label='bessel function')
-ax1.legend(loc='upper right')
-ax1.set_xlim(0, 300)
->>>>>>> changes to text and py fitting
 
 plt.show()
