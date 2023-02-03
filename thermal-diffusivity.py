@@ -134,8 +134,6 @@ if __name__ == "__main__":
         axs= [ax1, ax2, ax3]
 
         p0s=[(15.0, 400.0, 25.0), (20.0, 45.0, 70.0), (15, 400, 65)]
-<<<<<<< HEAD
-        p0s=[(15.0, 400.0, 25.0), (20.0, 45.0, 70.0), (15, 400, 65)]
 
         for i in range(3):
         #     trial_label = rf'trial{i+1}'
@@ -183,6 +181,7 @@ if __name__ == "__main__":
             trial2 = get_wave_from_csv('trial2.csv')
             trial3 = get_wave_from_csv('trial3.csv')
 
+    #trial 1 fitting attempt
         axs[0].set_title('trial 1')
         axs[0].plot(trial1[0], trial1[1], label='T_I')
         axs[0].plot(trial1[0], trial1[2], label='T_S')
@@ -191,27 +190,13 @@ if __name__ == "__main__":
             # print(pcov3**2)
         axs[0].plot(trial1[0], (1.2**(trial1[0]/700))*J_0(trial1[0], popt1[0], popt1[1], 0)+20*np.sin(trial1[0]/400)-14+popt1[2], label='bessel fit')
         axs[0].legend(loc='upper right')
-=======
-        p0s=[(20.0, 60000.0, 70.0), (20.0, 45.0, 70.0), (10, 60, 50)]
-
-        for i in range(3):
-            trial_label = rf'trial{i+1}'
-            # print(trial_label)
-            axs[i].set_title(trial_label)
-
-            trial = get_wave_from_csv(trial_label+'.csv')
-            # print(trial)
-            axs[i].plot(trial[0], trial[1], label='T_I')
-            axs[i].plot(trial[0], trial[2], label='T_S')
-            popt, pcov = op.curve_fit(J_0, trial[0], trial[1], p0=p0s[i])
-            # print(popt)
-            print(pcov**2)
-            axs[i].plot(trial[0], J_0(trial[0], popt[0], popt[1], popt[2]), label='bessel function')
->>>>>>> changes to text and py fitting
 
 
-<<<<<<< HEAD
-    #sinusoidal fitting attempt
+    #trial 2 fitting attempt
+
+
+
+    #trial 3 fitting attempt
         axs[2].set_title('trial 3 - sinusoidal superposition')
         axs[2].plot(trial3[0], trial3[1], label='T_I')
         axs[2].plot(trial3[0], trial3[2], label='T_S')
@@ -225,8 +210,6 @@ if __name__ == "__main__":
 
 
 
-=======
->>>>>>> changes to text and py fitting
         plt.subplots_adjust(hspace=0.5)
         plt.show()
 
