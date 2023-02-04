@@ -133,9 +133,9 @@ if __name__ == "__main__":
 
         axs= [ax1, ax2, ax3]
 
-        p0s=[(15.0, 400.0, 25.0), (20.0, 45.0, 70.0), (15, 400, 65)]
+        p0s=[(15.0, 400.0, 25.0), (20.0, 230.0, 40.0), (15, 400, 65)]
 
-        for i in range(3):
+        # for i in range(3):
         #     trial_label = rf'trial{i+1}'
         #     # print(trial_label)
         #     axs[i].set_title(trial_label)
@@ -151,55 +151,39 @@ if __name__ == "__main__":
 
         #     axs[i].legend(loc='upper right')
 
-            
-            trial1 = get_wave_from_csv('trial1.csv')
-            trial2 = get_wave_from_csv('trial2.csv')
-            trial3 = get_wave_from_csv('trial3.csv')
-
-        axs[0].set_title('trial 1')
-        axs[0].plot(trial1[0], trial1[1], label='T_I')
-        axs[0].plot(trial1[0], trial1[2], label='T_S')
-        popt1, pcov1 = op.curve_fit(J_0, trial1[0], trial1[1], p0=p0s[0])
-            # print(popt)
-            # print(pcov3**2)
-        axs[0].plot(trial1[0], (1.2**(trial1[0]/700))*J_0(trial1[0], popt1[0], popt1[1], 0)+20*np.sin(trial1[0]/400)-14+popt1[2], label='bessel fit')
-        axs[0].legend(loc='upper right')
-
-
-    #sinusoidal fitting attempt
-        axs[2].set_title('trial 3 - sinusoidal superposition')
-        axs[2].plot(trial3[0], trial3[1], label='T_I')
-        axs[2].plot(trial3[0], trial3[2], label='T_S')
-        popt3, pcov3 = op.curve_fit(J_0, trial3[0], trial3[1], p0=p0s[2]) #curve_fit
-            # print(popt)
-            # print(pcov3**2)
-        #plotting the curve fit bessel function
-        axs[2].plot(trial3[0], (2**(trial3[0]/700))*J_0(trial3[0], popt3[0], popt3[1], 0)-20*np.sin(trial3[0]/400)+popt3[2]+10, label='bessel fit')
-
-            
-            trial1 = get_wave_from_csv('trial1.csv')
-            trial2 = get_wave_from_csv('trial2.csv')
-            trial3 = get_wave_from_csv('trial3.csv')
+       
+        trial1 = get_wave_from_csv('trial1.csv')
+        trial2 = get_wave_from_csv('trial2.csv')
+        trial3 = get_wave_from_csv('trial3.csv')
 
     #trial 1 fitting attempt
-        axs[0].set_title('trial 1')
+        axs[0].set_title('trial 1 - fitting attempt')
         axs[0].plot(trial1[0], trial1[1], label='T_I')
         axs[0].plot(trial1[0], trial1[2], label='T_S')
+        axs[0].errorbar(trial1[0], trial1[1], yerr=2,  label='temp T_I error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         popt1, pcov1 = op.curve_fit(J_0, trial1[0], trial1[1], p0=p0s[0])
             # print(popt)
             # print(pcov3**2)
-        axs[0].plot(trial1[0], (1.2**(trial1[0]/700))*J_0(trial1[0], popt1[0], popt1[1], 0)+20*np.sin(trial1[0]/400)-14+popt1[2], label='bessel fit')
+        axs[0].plot(trial1[0], (1.2**(trial1[0]/700))*J_0(trial1[0], popt1[0], popt1[1], 0)+16*np.sin(trial1[0]/400)-10+popt1[2], label='bessel fit')
         axs[0].legend(loc='upper right')
 
 
     #trial 2 fitting attempt
-
-
+        axs[1].set_title('trial 2 - fitting attempt')
+        axs[1].plot(trial2[0], trial2[1], label='T_I')
+        axs[1].plot(trial2[0], trial2[2], label='T_S')
+        axs[1].errorbar(trial2[0], trial2[1], yerr=2,  label='temp T_I error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
+        popt2, pcov2 = op.curve_fit(J_0, trial2[0], trial2[1], p0=p0s[1])
+            # print(popt)
+            # print(pcov3**2)
+        axs[1].plot(trial2[0], J_0(trial2[0]-10, popt2[0], popt2[1], 0) + 10*np.sin(trial2[0]/400) -3 + popt2[2], label='bessel fit')
+        axs[1].legend(loc='upper right')
 
     #trial 3 fitting attempt
         axs[2].set_title('trial 3 - sinusoidal superposition')
         axs[2].plot(trial3[0], trial3[1], label='T_I')
         axs[2].plot(trial3[0], trial3[2], label='T_S')
+        axs[2].errorbar(trial3[0], trial3[1], yerr=2,  label='temp T_I error', color='k', fmt='none', capsize=1, lw=0.5)
         popt3, pcov3 = op.curve_fit(J_0, trial3[0], trial3[1], p0=p0s[2]) #curve_fit
             # print(popt)
             # print(pcov3**2)
@@ -207,21 +191,10 @@ if __name__ == "__main__":
         axs[2].plot(trial3[0], (2**(trial3[0]/700))*J_0(trial3[0], popt3[0], popt3[1], 0)-20*np.sin(trial3[0]/400)+popt3[2]+10, label='bessel fit')
         axs[2].legend(loc='upper right')
 
-
-
-
         plt.subplots_adjust(hspace=0.5)
         plt.show()
 
 
 
-
-    #try to initialize input from another phase difference
-
-# xx=np.linspace(30, 300, 100)
-# fig, (ax1) = plt.subplots(1,1)
-# # ax1.plot(xx, J_0(xx, 2, 60), label='bessel function')
-# ax1.legend(loc='upper right')
-# ax1.set_xlim(0, 300)
 
 plt.show()
