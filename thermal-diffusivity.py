@@ -42,15 +42,8 @@ def get_wave_from_csv(file):
             T_S[i] = T_I[0]
     return [t,T_I, T_S]
 
-    #define bessel function
+    #define bessel function J_0
 def J_0 (x, A, f, offset):
-    """real componant of the bessel function
-
-    Args:
-        x (np.array): x data
-        A (float): amplitude
-        f (float): frequency
-    """
     k = 50
     J = 0
     for i in range(k):
@@ -58,85 +51,58 @@ def J_0 (x, A, f, offset):
     J = A*J + offset
     return J
 
-    #define real component of kelvin function
-def ber_0(x, A, f, offset):
-    """real componant of the bessel function
 
-    Args:
-        x (np.array): x data
-        A (float): amplitude
-        f (float): frequency
-    """
-    k = 10
+    #define real component of kelvin function
+def ber_0(omega, radius,m):
+    k = 20
     ber = 0
     for i in range(k):
-        ber += ((np.cos((i * np.pi)/2))/(sp.factorial(i))**2)*((x**2)*f)**i     # calculate bessel function, f = m/(omega*(r**2))
-    ber = (A*ber) + offset                                                      # multiple the bessel function by some amplitude (A) and add some vertical offset (offset)
+        ber += ((np.sin((i * np.pi)/2))/(sp.factorial(i))**2)*(((np.sqrt(omega/m)*radius)**2)/4)**i    # calculate bessel function, f = m/(omega*(r**2))                                                 # multiple the bessel function by some amplitude (A) and add some vertical offset (offset)
     return ber
 
     #define complex component of kelvin function
-def ber_i(x, A, f, offset):
-    """real componant of the bessel function
-
-    Args:
-        x (np.array): x data
-        A (float): amplitude
-        f (float): frequency
-    """
-    k = 10
-    ber = 0
+def bei_0(omega, radius, m):
+    k = 20
+    bei = 0
     for i in range(k):
-        ber += ((np.sin((i * np.pi)/2))/(sp.factorial(i))**2)*((x**2)*f)**i     # calculate bessel function, f = m/(omega*(r**2))
-    ber = (A*ber) + offset                                                      # multiple the bessel function by some amplitude (A) and add some vertical offset (offset)
-    return ber
+         bei += ((np.cos((i * np.pi)/2))/(sp.factorial(i))**2)*(((np.sqrt(omega/m)*radius)**2)/4)**i      # calculate bessel function, f = m/(omega*(r**2))                                                    # multiple the bessel function by some amplitude (A) and add some vertical offset (offset)
+    return bei
 
-    #animation for finding optimal parameters
-def find_optimal_params(trial):
-    A_s = np.linspace(0, 20, 20)
-    f_s = np.linspace(10, 100000, 20)
-    offset_s = np.linspace(20, 70, 10)
-    chars = "/—\|"
-    chars_i = 0
-    
-    p0s = {}
-    perrs = []
-    for A in A_s:
-        for f in f_s:
-            for offset in offset_s:
+    #define the fitting function at the inner radius, temperature function
+omega = 2
+radius = 2
+def fitting_function(time, m, A, offset):
+    k = 20
+    ber = 0
+    bei = 0
+    for i in range(k):
+        ber += ((np.sin((i * np.pi)/2))/(sp.factorial(i))**2)*(((np.sqrt(omega/m)*radius)**2)/4)**i
+        bei += ((np.cos((i * np.pi)/2))/(sp.factorial(i))**2)*(((np.sqrt(omega/m)*radius)**2)/4)**i 
+    real_temp_component = A*ber*np.cos(omega*time) + A*bei*np.sin(omega*time) + offset
+    return real_temp_component
 
-                sys.stdout.write('\r'+'calculating . . .  '+chars[chars_i % 4]) # animating output to show that function is running
-                chars_i += 1
-                
-                popt, pcov = op.curve_fit(J_0, trial[0], trial[1])
-                perr = np.sqrt(np.diag(pcov))[0]
-                # print(perr)
-                perrs.append(perr)
-                p0s[str(perr)]=(A, f, offset)
 
-                sys.stdout.flush() # clearing animation
-    
-    return p0s[str(np.min(perrs))]
+
 
 
     #plotting / animating
 if __name__ == "__main__":
 
     plotting = True
-    optimizing = False
 
     # trial1 = get_wave_from_csv(r'trial1.csv')
     # trial2 = get_wave_from_csv(r'trial2.csv')
     # trial3 = get_wave_from_csv(r'trial3.csv')
 
     if plotting:
-        fig, (ax1,ax2, ax3) = plt.subplots(3,1)
+        fig, (ax1,ax2, ax3) = plt.subplots(3,1, sharex='col')
         ax2.set_ylabel('temperature')
         ax3.set_xlabel('time')
 
         axs= [ax1, ax2, ax3]
 
-        p0s=[(15.0, 400.0, 25.0), (20.0, 230.0, 40.0), (15, 400, 65)]
-
+        #p0s=[(15.0, 400.0, 25.0), (20.0, 230.0, 40.0), (15, 400, 65)]
+       
         # for i in range(3):
         #     trial_label = rf'trial{i+1}'
         #     # print(trial_label)
@@ -162,6 +128,97 @@ if __name__ == "__main__":
         trial2_error = 2
         trial3_error = 2
 
+        omega1 = 2*np.pi/120
+        omega2 = 2*np.pi/90
+        omega3 = 2*np.pi/120
+
+        p0s=[(0.089, -10, 50), (0.089, -10, 50), (0.1, 0, 65)]
+
+
+
+            #first frequency
+        omega = omega1
+        radius = 6.38  #in mm 
+
+        axs[0].set_title('trial 1 - fitting attempt')
+        axs[0].plot(trial1[0], trial1[1], label='T_I')
+        axs[0].plot(trial1[0], trial1[2], label='T_S')
+        axs[0].errorbar(trial1[0], trial1[1], yerr=trial1_error,  label='temp T_I error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
+        popt1, pcov1 = op.curve_fit(fitting_function, trial1[0], trial1[1], p0s[0] )
+        axs[0].plot(trial1[0], fitting_function(trial1[0], *popt1) +10*np.sin(trial1[0]/400) -5, label='temperature fit' )  
+        axs[0].legend(loc='upper right')
+
+            #second frequency
+        omega=omega2
+
+        axs[1].set_title('trial 2 - fitting attempt')
+        axs[1].plot(trial2[0], trial2[1], label='T_I')
+        axs[1].plot(trial2[0], trial2[2], label='T_S')
+        axs[1].errorbar(trial2[0], trial2[1], yerr=trial2_error,  label='temp T_I error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
+        popt2, pcov2 = op.curve_fit(fitting_function, trial2[0], trial2[1], p0s[1] )
+        axs[1].plot(trial2[0], fitting_function(trial2[0], *popt2) +14*np.sin(trial2[0]/400) -5, label='temperature fit' )  
+        axs[1].legend(loc='upper right')
+
+
+
+             #third frequency
+        omega=omega3
+
+        axs[2].set_title('trial 3 - fitting attempt')
+        axs[2].plot(trial3[0][20:70], trial3[1][20:70], label='T_I')
+        axs[2].plot(trial3[0][20:70], trial3[2][20:70], label='T_S')
+        axs[2].errorbar(trial3[0][20:70], trial3[1][20:70], yerr=trial3_error,  label='temp T_I error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
+        popt3, pcov3 = op.curve_fit(fitting_function, trial3[0][20:70], trial3[1][20:70], p0s[2] )
+        axs[2].plot(trial3[0][20:70], fitting_function(trial3[0][20:70], *popt3) -13*np.sin(trial3[0][20:70]/400)+10 , label='temperature fit' )  
+        axs[2].legend(loc='upper right')
+        plt.show()
+
+
+        #quick chi2 fits
+    omega = omega1
+    slice1 = [11, 62]   #optimal range of which the best curve_fit covers
+    n1 = trial1[1][slice1[0]:slice1[1]]
+    n1_fit = fitting_function(trial1[0], *popt1) +10*np.sin(trial1[0]/400) -5
+    n1_fit = n1_fit[slice1[0]:slice1[1]]
+    chi2_1 = np.sum((n1 - n1_fit)**2/(trial1_error**2))
+    dof_1 = len(n1) - len(popt1)
+    prob1 = 1 - chi2.cdf(chi2_1, dof_1)
+   
+    omega=omega2
+    slice2 = [21, 92]   #optimal range of which the best curve_fit covers
+    n2 = trial2[1][slice2[0]:slice2[1]]
+    n2_fit = fitting_function(trial2[0], *popt2) +14*np.sin(trial2[0]/400) -5
+    n2_fit = n2_fit[slice2[0]:slice2[1]]
+    chi2_2 = np.sum((n2 - n2_fit)**2/(trial2_error**2))
+    dof_2 = len(n2) - len(popt2)
+    prob2 = 1 - chi2.cdf(chi2_2, dof_2)
+    
+    omega=omega3
+    slice3 = [20, 70]   #optimal range of which the best curve_fit covers
+    n3 = trial3[1][slice3[0]:slice3[1]]
+    n3_fit = fitting_function(trial3[0][20:70], *popt3) -13*np.sin(trial3[0][20:70]/400)+10
+    #n3_fit = n3_fit[slice3[0]:slice3[1]]       #remove this, since this makes the new array shape (30,) not (50,), which is what we want
+    chi2_3 = np.sum((n3 - n3_fit)**2/(trial3_error**2))
+    dof_3 = len(n3) - len(popt3)
+    prob3 = 1 - chi2.cdf(chi2_3, dof_3)
+
+
+        #extract values
+    print('')
+    print('The computed value of the thermal diffusivity m for trial 1 @ 60s is', popt1[0])
+    print('The probability that the fit is good for trial 1 is ', prob1)
+    print('')
+    print('The computed value of the thermal diffusivity m for trial 2 @ 45s is', popt2[0])
+    print('The probability that the fit is good for trial 2 is ', prob2)
+    print('')
+    print('The computed value of the thermal diffusivity m for trial 3 @ 60s is', popt3[0])
+    print('The probability that the fit is good for trial 3 is ', prob3)
+    print('')
+
+
+
+
+""" 
     #trial 1 fitting attempt
         axs[0].set_title('trial 1 - fitting attempt')
         axs[0].plot(trial1[0], trial1[1], label='T_I')
@@ -244,7 +301,6 @@ r_error = 0.1       #this is just 0.05mm + 0.05mm
 
 omega_applied_1 = 60    #in seconds
 omega1_error = 2    #not sure about this value yet
+"""
 
-
-
-plt.show()
+ 
