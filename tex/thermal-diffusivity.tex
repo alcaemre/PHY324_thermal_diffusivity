@@ -94,7 +94,7 @@
     \vspace{5pt} 
     \large PHY324\\
     \vspace{5pt}
-    Emre Alca - , Jace Alloway - 1006940802
+    Emre Alca - 1005756193, Jace Alloway - 1006940802
 \end{center}
 
 \nd \hrulefill
@@ -106,7 +106,9 @@
 
 \fontfamily{qag} \selectfont \textbf{Abstract}
 
-\fontfamily{qpl} \selectfont \lipsum[1]\\
+\fontfamily{qpl} \selectfont 
+
+\lipsum[1]\\
 
         %abstract here
 
@@ -122,21 +124,97 @@
 
     \fontfamily{qag} \selectfont \textbf{Introduction}
     
-    \fontfamily{qpl} \selectfont \lipsum
-
-    %body here
-
-
-
-
-
-
-
-    \fontfamily{qag} \selectfont \textbf{Methods}
+    \fontfamily{qpl} \selectfont 
     
-    \fontfamily{qpl} \selectfont \lipsum
+    In thermal physics, the heat transfer between two bodies is the amount of heat energy conducted from one region of high temperature to a region of low temperature. This is studied as a means of energy transfer, which is conserved when no external elements contribute by adding more heat into the system. The thermal diffusivity of a solid is a direct measure of the rate of heat transfer over two regions in a solid.
+    
+    The purpose of this experiment was to determine the value of the thermal diffusivity constant of a rubber tube with a thermometer inside, while the external surface of the tube was placed in ice and boiling water baths over a constant time interval.  
 
-    %body here
+
+
+
+    \vspace{10pt}
+
+    \fontfamily{qag} \selectfont \textbf{Theory of Heat Conduction}
+    
+    \fontfamily{qpl} \selectfont 
+     
+
+    For a volume $V$ with surface $S$, the amount of heat entering or exiting the volume over a time interval may be written in terms of the heat flux vector ${\bf{q}}$:
+    \[
+        \frac{d}{dt}\int_V \rho e\, dV = -\int_S {\bf{q}}\cdot {\bf{n}}\, dA,  \tag{1} 
+    \]
+    \nd where $e = \frac{E}{m}$ is the energy per unit mass, $\rho$ the density of the body, and ${\bf{n}}$ the outward unit normal of the surface. Upon further examination, one may notice the time-independence of the body's density, hence allowing the time derivative to be taken within the integral: 
+    \[
+        \int_V \rho \frac{\del e}{\del t}\, dV = -\int_V\nabla\cdot {\bf{q}}\, dV,  \tag{2}
+    \]
+    \nd with Gauss's divergence theorem having been applied on the right hand side to re-write the flux of the heat vector.
+
+    Since the internal heat $e$ and respective temperature $T$ are only related by the specific heat proportionality, we may in turn write, with the exception of the integral, 
+    \[
+        \rho \gamma \frac{dT}{dt} = -\nabla \cdot {\bf{q}}. \tag{3}  
+    \]
+
+    Now, consider Fourier's contribution. For thermal conduction, it was experimentally shown that the rate of heat flow over a surface is directly proportional to the temperature gradient applied over the body, hence allowing Fourier to arrive at the thermal conductivity equation 
+    \[
+        {\bf{q}} = -\kappa \nabla T, \tag{5}
+    \]
+    \nd where $\kappa$ is the proportionality constant, denoted the thermal conductivity. Taking equations (3) and (4) and substituting, we arrive at the thermal diffusion (or heat) equation in three dimensions:
+    \[
+        \frac{dT}{dt} = -\frac{\kappa}{\rho \gamma} \nabla^2 T = -m\nabla^2 T \tag{5}    
+    \]
+    \nd with $m = \frac{\kappa}{\rho\gamma}$ being the thermal diffusivity constant.
+
+    In one dimension, this equation takes the simple form 
+    \[
+        \frac{\del T}{\del t} = -m\frac{\del^2 T}{\del x^2}. \tag{6}
+    \]
+    \nd In two dimensions, one may perform the change of variables to polar coordinates $x=r\cos\theta$, \\ $y=r\sin\theta$ to arrive at the form of the Laplacian operator $\nabla^2 = \frac{\del^2 }{\del r^2} + \frac{1}{r}\frac{\del}{\del r} + \frac{1}{r^2}\frac{\del^2}{\del\theta^2}$. Furthermore, since our problem is cylindrically symmetric, we may only consider the radial component of the temperature, making the diffusion equation of the form
+    \[
+        -m\left[\frac{\del^2 T}{\del r^2} + \frac{1}{r}\frac{\del T}{\del r}\right] = \frac{\del T}{\del t}. \tag{7} 
+    \] 
+
+    To solve (7), one may quickly carry out a seperation of variables $T(r,t) = R(r)T(t)$. Hence, by diving out $-m$, 
+
+    \[
+        \frac{R''}{R} + \frac{1}{r}\frac{R'}{R} = -\frac{1}{m}\frac{T'}{T} = -\lambda^2 = \text{constant} \tag{8}
+    \]
+    \nd which implies firstoff that $T'(t) = \lambda^2mT(t)$, or $T(t) = e^{i\lambda^2m\,t}$. However, this is trivial. In our experiment, we wished to determine the thermal diffusivity $m$ by applying an external temperature on the solid of a frequency rate $\omega$, so we expect $T(t) = e^{i\omega t}$, thus yielding the relation $\lambda^2 = -\frac{i\omega}{m}$. Secondly, (8) yields the Bessel equation:
+    \[
+        \frac{\del^2 R}{\del r^2} + \frac{1}{r}\frac{\del R}{\del r} + \lambda^2 R = 0. \tag{9}
+    \]
+    
+    Since equation (9) is the Bessel equation of zeroth order, executing a series solution in terms of $\lambda r$ yields the order zero Bessel function $A J_0(\lambda r)$
+    \begin{align*}
+        AJ_0(\lambda r) &= A\sum_{k=0}^{\infty}\frac{(-1)^k}{(k!)^2}\left(\frac{\lambda r}{2}\right)^{2k} \tag{10.1}  \\
+        &=A\sum_{k=0}^{\infty}\frac{1}{(k!)^2}\left(\frac{i\omega r^2}{4m}\right)^{k} \tag{10.2}
+    \end{align*}
+    \nd which may be expanded in terms of the order zero Kelvin functions $\text{ber}_0$ and $\text{bei}_0$, 
+    \begin{align*}
+        J_0(-ix) &= \text{ber}_0(x) + i\, \text{bei}_0(x) \tag{11.1}\\ 
+        &= \sum_{k=0}^{\infty} \frac{\cos\left(\frac{k\pi}{2}\right)}{(k!)^2}\left(\frac{x}{2}\right)^2\\
+        &\hspace{20pt}+ i\, \sum_{k=0}^{\infty} \frac{\sin\left(\frac{k\pi}{2}\right)}{(k!)^2}\left(\frac{x}{2}\right)^2\tag{11.2} 
+    \end{align*}
+    \nd where $x = \sqrt{\frac{\omega}{m}}r$. Upon resubstitution of $R(r)$ into $T(r,t) = R(r)e^{i\omega t}$, the expression for the temperature is obtained: 
+   \begin{align*}
+        T(r, t) &= A\, \mathbb{R}\text{e}\bigg\{\bigg[\text{ber}_0(\sqrt{\omega/m}r)\\
+        &\hspace{40pt} + i\, \text{bei}_0(\sqrt{\omega/m}r)\bigg]e^{i\omega t}\bigg\} \\
+        &=   A\text{ber}_0(\sqrt{\omega/m}r)\cos(\omega t) \\
+        & \hspace{40pt} +  \text{bei}_0(\sqrt{\omega/m}r)\sin(\omega t),  \tag{12}
+    \end{align*} 
+    \nd where the real part is taken, since (12) is the measured value acquired from taking data at the inner radius of the rubber tube.
+
+
+
+
+
+    \vspace{20pt}
+
+    \fontfamily{qag} \selectfont \textbf{Materials and Methods}
+    
+    \fontfamily{qpl} \selectfont 
+
+    To begin, three thermometers were required to directly measure the internal temperatures of each of the ice and boiling water baths, and one for the internal temperature of the rubber tubing. Two retort stands and thermometer clamps were obtained so that the thermometers for the ice and boiling water baths may be held. First, two beakers were filled with tap water. One beaker was placed on a hotplate, while the other was filled with ice and placed far away from the hotplate so that minimal external thermal energy may be gained. The three thermometers were then calibrated at room temperature in case there was any discrepancy between measurements. The initial thermometer values were recorded with respective reading uncertainties. 
 
 
 
