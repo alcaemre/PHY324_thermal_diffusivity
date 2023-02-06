@@ -1,7 +1,7 @@
 # Fdb version 3
-["pdflatex"] 1675658233 "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.tex" "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf" "thermal-diffusivity" 1675658279
+["pdflatex"] 1675658233 "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.tex" "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf" "thermal-diffusivity" 1675702886
   "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.aux" 1675658236 686 4ce905362b6645b598ea182482e9aeed ""
-  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.tex" 1675658278 9215 9a33beece9ee306e6f379a233ed43752 ""
+  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.tex" 1675702885 9215 9a33beece9ee306e6f379a233ed43752 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc" 1529098226 2409 c64dab22331c83731e970f6020b4448b ""
   "/usr/local/texlive/2021/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2021/texmf-dist/fonts/tfm/public/amsfonts/cmextra/cmex7.tfm" 1246382020 1004 54797486969f23fa377b128694d548df ""
@@ -249,11 +249,11 @@
   "/usr/local/texlive/2021/texmf.cnf" 1616695596 577 4c1911a7228e554c6032256d3cf5567d ""
   "thermal-diffusivity.aux" 1675658236 686 4ce905362b6645b598ea182482e9aeed "pdflatex"
   "thermal-diffusivity.out" 1675658236 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
-  "thermal-diffusivity.tex" 1675658278 9215 9a33beece9ee306e6f379a233ed43752 ""
+  "thermal-diffusivity.tex" 1675702885 9215 9a33beece9ee306e6f379a233ed43752 ""
   (generated)
-  "thermal-diffusivity.out"
+  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf"
   "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.log"
+  "thermal-diffusivity.out"
   "thermal-diffusivity.aux"
   "thermal-diffusivity.log"
-  "/Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.pdf"
   "thermal-diffusivity.pdf"
