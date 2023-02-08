@@ -95,9 +95,9 @@ if __name__ == "__main__":
     # trial3 = get_wave_from_csv(r'trial3.csv')
 
     if plotting:
-        fig, (ax1,ax2, ax3) = plt.subplots(3,1, sharex='col')
-        ax2.set_ylabel('temperature')
-        ax3.set_xlabel('time')
+        fig, (ax1,ax2, ax3) = plt.subplots(3,1)
+        ax2.set_ylabel('Temperature (°C)')
+        ax3.set_xlabel('Time (s)')
 
         axs= [ax1, ax2, ax3]
 
@@ -157,7 +157,7 @@ if __name__ == "__main__":
         axs[1].errorbar(trial2[0], trial2[1], yerr=trial2_error,  label='temp T_I error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         popt2, pcov2 = op.curve_fit(fitting_function, trial2[0], trial2[1], p0s[1] )
         axs[1].plot(trial2[0], fitting_function(trial2[0], *popt2) +14*np.sin(trial2[0]/400) -5, label='temperature fit' )  
-        axs[1].legend(loc='upper right')
+        # axs[1].legend(loc='upper right')
 
 
 
@@ -170,7 +170,9 @@ if __name__ == "__main__":
         axs[2].errorbar(trial3[0][20:70], trial3[1][20:70], yerr=trial3_error,  label='temp T_I error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         popt3, pcov3 = op.curve_fit(fitting_function, trial3[0][20:70], trial3[1][20:70], p0s[2] )
         axs[2].plot(trial3[0][20:70], fitting_function(trial3[0][20:70], *popt3) -13*np.sin(trial3[0][20:70]/400)+10 , label='temperature fit' )  
-        axs[2].legend(loc='upper right')
+        # axs[2].legend(loc='upper right')
+
+        plt.subplots_adjust(hspace=0.6)
         plt.show()
 
 

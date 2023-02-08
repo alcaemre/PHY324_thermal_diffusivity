@@ -127,10 +127,10 @@
     \fontfamily{qpl} \selectfont 
     
     In thermal physics, the heat transfer between two bodies is the amount of heat energy conducted from one region of high temperature to a region of low temperature. This is studied as a means of energy transfer, which is conserved when no external elements contribute by adding more heat into the system. The thermal diffusivity of a solid is a direct measure of the rate of heat transfer over two regions in a solid.
+
+    Thermal diffusivity has some interesting effects. For example, let's say that a thermometer is placed inside of a tube of tortured rubber and and placed an extreme hot bath and an extreme cold bath, and switched between them at some constant interval (i.e. making a square wave of exposed temperature). Something strange happens as this thermometer was transfered between the hot and cold baths: for a short while after a transition, say from cold to hot water, the internal temperature of the tortured rubber continues to decrease! (see \label{temperatureGraph} for results that show this)
     
-    The purpose of this experiment was to determine the value of the thermal diffusivity constant of a rubber tube with a thermometer inside, while the external surface of the tube was placed in ice and boiling water baths over a constant time interval.  
-
-
+    This phase delay of internal temperature is a consequence of thermal diffusivity. The higher a material's coefficient of thermal diffusivity $m$, the larger $m$ is, the larger the phase delay. The purpose of this experiment was to determine the value of the thermal diffusivity constant of tortured rubber. 
 
 
     \vspace{10pt}
@@ -138,13 +138,15 @@
     \fontfamily{qag} \selectfont \textbf{Theory of Heat Conduction}
     
     \fontfamily{qpl} \selectfont 
+
+    How can we extract a value of $m$? Using the physics of head conduction of course!
      
 
-    For a volume $V$ with surface $S$, the amount of heat entering or exiting the volume over a time interval may be written in terms of the heat flux vector ${\bf{q}}$:
+    For an object with a volume $V$ bounded by a surface $S$, the amount of heat entering or exiting the volume over a time interval may be written in terms of the heat flux vector ${\bf{q}}$:
     \[
         \frac{d}{dt}\int_V \rho e\, dV = -\int_S {\bf{q}}\cdot {\bf{n}}\, dA,  \tag{1} 
     \]
-    \nd where $e = \frac{E}{m}$ is the energy per unit mass, $\rho$ the density of the body, and ${\bf{n}}$ the outward unit normal of the surface. Upon further examination, one may notice the time-independence of the body's density, hence allowing the time derivative to be taken within the integral: 
+    \nd where $e$ is the energy per unit mass, $\rho$ the density of the body, and ${\bf{n}}$ the outward unit normal of the surface. Due to the time-independence of the body's density, the time derivative to be taken within the integral: 
     \[
         \int_V \rho \frac{\del e}{\del t}\, dV = -\int_V\nabla\cdot {\bf{q}}\, dV,  \tag{2}
     \]
@@ -169,21 +171,22 @@
     \[
         \frac{\del T}{\del t} = -m\frac{\del^2 T}{\del x^2}. \tag{6}
     \]
-    \nd In two dimensions, one may perform the change of variables to polar coordinates $x=r\cos\theta$, \\ $y=r\sin\theta$ to arrive at the form of the Laplacian operator $\nabla^2 = \frac{\del^2 }{\del r^2} + \frac{1}{r}\frac{\del}{\del r} + \frac{1}{r^2}\frac{\del^2}{\del\theta^2}$. Furthermore, since our problem is cylindrically symmetric, we may only consider the radial component of the temperature, making the diffusion equation of the form
+    \nd In two dimensions, a change of variables to polar coordinates $x=r\cos\theta$, \\ $y=r\sin\theta$ yields the form of the Laplacian operator $\nabla^2 = \frac{\del^2 }{\del r^2} + \frac{1}{r}\frac{\del}{\del r} + \frac{1}{r^2}\frac{\del^2}{\del\theta^2}$. Furthermore, due to cylindrical symmetry,  only the radial component of the temperature needs to be considered. Thus the diffusion equation takes the form
     \[
         -m\left[\frac{\del^2 T}{\del r^2} + \frac{1}{r}\frac{\del T}{\del r}\right] = \frac{\del T}{\del t}. \tag{7} 
     \] 
 
-    To solve (7), one may quickly carry out a seperation of variables $T(r,t) = R(r)T(t)$. Hence, by diving out $-m$, 
+    (7) can be solved by a seperation of variables $T(r,t) = R(r)T(t)$. Hence, by diving out $-m$, 
 
     \[
         \frac{R''}{R} + \frac{1}{r}\frac{R'}{R} = -\frac{1}{m}\frac{T'}{T} = -\lambda^2 = \text{constant} \tag{8}
     \]
-    \nd which implies firstoff that $T'(t) = \lambda^2mT(t)$, or $T(t) = e^{i\lambda^2m\,t}$. However, this is trivial. In our experiment, we wished to determine the thermal diffusivity $m$ by applying an external temperature on the solid of a frequency rate $\omega$, so we expect $T(t) = e^{i\omega t}$, thus yielding the relation $\lambda^2 = -\frac{i\omega}{m}$. Secondly, (8) yields the Bessel equation:
+    \nd which implies firstoff that $T'(t) = \lambda^2mT(t)$, or $T(t) = e^{i\lambda^2m\,t}$.
+    
+    The purpose of this experiment, however, is to determine the thermal diffusivity $m$ by applying an external temperature on the solid of a frequency rate $\omega$, which yields the expectation that $T(t) = e^{i\omega t}$, implying $\lambda^2 = -\frac{i\omega}{m}$. Secondly, (8) yields the Bessel equation:
     \[
         \frac{\del^2 R}{\del r^2} + \frac{1}{r}\frac{\del R}{\del r} + \lambda^2 R = 0. \tag{9}
     \]
-    
     Since equation (9) is the Bessel equation of zeroth order, executing a series solution in terms of $\lambda r$ yields the order zero Bessel function $A J_0(\lambda r)$
     \begin{align*}
         AJ_0(\lambda r) &= A\sum_{k=0}^{\infty}\frac{(-1)^k}{(k!)^2}\left(\frac{\lambda r}{2}\right)^{2k} \tag{10.1}  \\
@@ -214,8 +217,11 @@
     
     \fontfamily{qpl} \selectfont 
 
-    To begin, three thermometers were required to directly measure the internal temperatures of each of the ice and boiling water baths, and one for the internal temperature of the rubber tubing. Two retort stands and thermometer clamps were obtained so that the thermometers for the ice and boiling water baths may be held. First, two beakers were filled with tap water. One beaker was placed on a hotplate, while the other was filled with ice and placed far away from the hotplate so that minimal external thermal energy may be gained. The three thermometers were then calibrated at room temperature in case there was any discrepancy between measurements. The initial thermometer values were recorded with respective reading uncertainties. 
+    % To begin, three thermometers were required to directly measure the internal temperatures of each of the ice and boiling water baths, and one for the internal temperature of the rubber tubing. Two retort stands and thermometer clamps were obtained so that the thermometers for the ice and boiling water baths may be held. First, two beakers were filled with tap water. One beaker was placed on a hotplate, while the other was filled with ice and placed far away from the hotplate so that minimal external thermal energy may be gained. The three thermometers were then calibrated at room temperature in case there was any discrepancy between measurements. The initial thermometer values were recorded with respective reading uncertainties. 
 
+    This experiments revolves around two beakers. One is filled with ice and water and placed on an adjustable stand, the other is placed on a hot plate and brought to a boil. A thermometer is held in each of these by a retort stand. A third thermometer is encased in a cylinder of tortured rubber (not only on its sides, but also below). This third, insulated thermometer is transferred between these two beakers at regular intervals. These intervals were measured by an iphone stopwatch. A video of the experiment was taken where all three thermometers where clearly visible at all times. The temperatures of all three of the thermometers were taken at 10 second intervals.
+
+    Three trials were performed. The first trial had the insulated thermometer start at it a room-temperature of 27 \textdegree C and was transferred from one beaker to another in 60 second intervals. The second also had the insulated thermometer start at it a room-temperature of 27 \textdegree C, but was transferred at 45 second intervals. The insulated thermometer was placed in the hot bath first for both of these trials and experienced 5 cycles of hot-cold baths. For the third and final trial, the insulated thermometer was placed in the hot beaker and allowed to come up to an extreme temperature before being transferred between the beakers at 60 second intervals for 6 cycles.
 
 
 
