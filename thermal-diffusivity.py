@@ -137,9 +137,9 @@ if __name__ == "__main__":
     plotting = True #arguments are True/False as a parameter 
 
     if plotting:
-        fig, (ax1,ax2, ax3) = plt.subplots(3,1, sharex='col')
-        ax2.set_ylabel('temperature')
-        ax3.set_xlabel('time')
+        fig, (ax1,ax2, ax3) = plt.subplots(3,1)
+        ax2.set_ylabel('Temperature (°C)')
+        ax3.set_xlabel('Time (s)')
 
         axs= [ax1, ax2, ax3]
     
