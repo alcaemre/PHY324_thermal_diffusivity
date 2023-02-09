@@ -130,7 +130,7 @@
 
     Thermal diffusivity has some interesting effects. For example, let's say that a thermometer is placed inside of a tube of tortured rubber and and placed an extreme hot bath and an extreme cold bath, and switched between them at some constant interval (i.e. making a square wave of exposed temperature). Something strange happens as this thermometer was transfered between the hot and cold baths: for a short while after a transition, say from cold to hot water, the internal temperature of the tortured rubber continues to decrease! (see \label{temperatureGraph} for results that show this)
     
-    This phase delay of internal temperature is a consequence of thermal diffusivity. The higher a material's coefficient of thermal diffusivity $m$, the larger $m$ is, the larger the phase delay. The purpose of this experiment was to determine the value of the thermal diffusivity constant of tortured rubber. 
+    This phase delay of internal temperature is a consequence of thermal diffusivity. The higher a material's coefficient of thermal diffusivity $m$, the larger $m$ is, the larger the phase delay. The purpose of this experiment was to determine the value of the thermal diffusivity of tortured rubber. 
 
 
     \vspace{10pt}
@@ -139,7 +139,7 @@
     
     \fontfamily{qpl} \selectfont 
 
-    How can we extract a value of $m$? Using the physics of head conduction of course!
+    How can we extract a value of $m$? Using the physics of heat conduction!
      
 
     For an object with a volume $V$ bounded by a surface $S$, the amount of heat entering or exiting the volume over a time interval may be written in terms of the heat flux vector ${\bf{q}}$:
@@ -205,7 +205,7 @@
         &=   A\text{ber}_0(\sqrt{\omega/m}r)\cos(\omega t) \\
         & \hspace{40pt} +  \text{bei}_0(\sqrt{\omega/m}r)\sin(\omega t),  \tag{12}
     \end{align*} 
-    \nd where the real part is taken, since (12) is the measured value acquired from taking data at the inner radius of the rubber tube.
+    \nd where the real part is taken, since (12) is the measured value acquired from taking data at the inner radius of the rubber tube. Finally, one must notice the inseperability of the information provided by $\text{ber}_0$ and $\text{bei}_0$, since they only represent relative amplitudes of sinusoids with identicle frequencies.
 
 
 
@@ -219,13 +219,51 @@
 
     % To begin, three thermometers were required to directly measure the internal temperatures of each of the ice and boiling water baths, and one for the internal temperature of the rubber tubing. Two retort stands and thermometer clamps were obtained so that the thermometers for the ice and boiling water baths may be held. First, two beakers were filled with tap water. One beaker was placed on a hotplate, while the other was filled with ice and placed far away from the hotplate so that minimal external thermal energy may be gained. The three thermometers were then calibrated at room temperature in case there was any discrepancy between measurements. The initial thermometer values were recorded with respective reading uncertainties. 
 
-    This experiments revolves around two beakers. One is filled with ice and water and placed on an adjustable stand, the other is placed on a hot plate and brought to a boil. A thermometer is held in each of these by a retort stand. A third thermometer is encased in a cylinder of tortured rubber (not only on its sides, but also below). This third, insulated thermometer is transferred between these two beakers at regular intervals. These intervals were measured by an iphone stopwatch. A video of the experiment was taken where all three thermometers where clearly visible at all times. The temperatures of all three of the thermometers were taken at 10 second intervals.
-
+    This experiments involves two beakers. One is filled with ice water and placed on an adjustable stand, while other is placed on a hot plate and brought to a boil. A thermometer was held in each of these by a retort stand and clamp. A third thermometer, encased in a cylinder of tortured rubber (not only on its sides, but also below), is transferred between these two beakers at controlled time intervals. These intervals were measured by an iPhone stopwatch. A video of the experiment was taken where all three thermometers were visible at all times. The temperatures of all three of the thermometers were taken at 10 second intervals.
+    
     Three trials were performed. The first trial had the insulated thermometer start at it a room-temperature of 27 \textdegree C and was transferred from one beaker to another in 60 second intervals. The second also had the insulated thermometer start at it a room-temperature of 27 \textdegree C, but was transferred at 45 second intervals. The insulated thermometer was placed in the hot bath first for both of these trials and experienced 5 cycles of hot-cold baths. For the third and final trial, the insulated thermometer was placed in the hot beaker and allowed to come up to an extreme temperature before being transferred between the beakers at 60 second intervals for 6 cycles.
 
+    Afterwards, the data was extracted from the footage by scrubbing through the video, and writing down the temperature measurements of both the hot and ice water baths, as well as the temperature of the insulated thermometer in a table. The iPhone stopwatch was used as a time reference. Afterwards, uncertainties in measurements were also recorded, since their values were constant by means of thermometer and stopwatch random and systematic errors. This was repeated for all three trials, then the data was typset into a .csv file to be imported for data analysis.
 
 
 
+    \vspace{10pt}
+
+    \fontfamily{qag} \selectfont \textbf{Data Analysis}
+    
+    \fontfamily{qpl} \selectfont In this project, all of the data analysis occured in Python. The .csv files were loaded using the `pandas' database, then the individual time and temperature columns were extracted for all three trials. Using `matplotlib.pyplot', the raw data was plotted along with the uncertainties, created by the `pyplot.errorbar' function. These included the internal thermometer temperature ($T_I$) and the applied temperature ($T_S$). 
+
+    Next, the fitting equation (equation (12)) was defined, using a `for loop' for the series functions $\text{ber}_0$ and $\text{bei}_0$. Since Python cannot interpret infinite series elements, a constant number of summation terms was specified. Through trial and error, it was found that $20$ terms was most ideal for capturing all of the acquired data (any lower than this and the series fuctions would fall off to $\pm\infty$). The parameters set for the fitting function were an amplitude $A$, thermal diffusivity $m$, and an offset temperature $T_0$. The values of $r_{\text{inner}}$, $t$, and $\omega$ were all known, so by fitting the data directly the appropriate value of $m$ could be extracted.   
+
+    Secondly, `scipy.optimize.curve\_fit' was imported. The majority of the curve fitting required a `guess and check' method, since the temperature function (12) is highly sensitive to inputs for large summation iteration values. The function requires many inputs to fit to, and does not account for any amount of time that the thermometer took to come to approach an equilibrium oscillation. 
+    
+    \begin{figure}[H]
+        \includegraphics[width=3.3in]{calibration comparison.png}
+        \caption*{[Figure 1] The comparison of curve fitting with and without calibration. This is an excerpt of the final data, used to show the process of data fitting.}
+    \end{figure}
+
+    At first, it was noted that curve\_fit was fitting the ideal function with the appropriate angular frequencies, however due to the fluctation of the temperature approaching an equilibrium value, was not apparently matching an overall amplitude. To fix this, simple sinusoidal functions of very long frequency were added onto the tail of the curve\_fit plots and were adjusted until the curves matched. This was tedious, but only affected the final $\chi^2$ value, and not the extracted value of $m$. This was repeated for all three trials and each extracted a similar result (Figure 1). This was done manually to avoid fitting too many parameters, possibly decreasing our goodness-of-fit and our quality of our value of $m$. 
+
+    Lastly, uncertainties needed to be propogated. Since uncertainties for the radius $r$, time $t$ and temperatures $T_I, \, T_S$ were all given, it was extremely difficult to extract a definite uncertainty for $m$ algebraically, since $m$ lies implicity within $T(r, t)$. Another approach was taken, which was to compare the uncertainties of the optimal parameters which curve\_fit generated (these are the `pcov', or covariant values) to the random and systematic errors generated by our measurements, and see if these uncertainties overlap in the fit. If the values of the maximal and minimal uncertainties overlap with the fit, this would mean that the computed values of the `popt' (optimal parameters) are reasonable and account for the appropriate errors in measurement. This was done by defining the absolute uncertainty value input (sigma) to be the temperature error, and then the maximal and minimal fit curves were plotted, and the distance of their uncertainties to the actual data uncertainties. An example of this is shown in Figure 2.   
+    
+    \begin{figure}[H]
+        \includegraphics[width=3.3in]{uncertainty example.png}
+        \caption*{[Figure 2] An instance of the uncertainty overlap observed while curve fitting. This is taken from Trial 3, from the final dataset to show how effective the covariance determination was.}
+    \end{figure}
+
+    \nd This was completed for all three data sets, and a $\chi^2$ fit was taken out to determine the quality of each fit. The results are displayed in the next section. 
+
+
+
+
+
+
+
+    \vspace{10pt}
+
+    \fontfamily{qag} \selectfont \textbf{Results}
+    
+    \fontfamily{qpl} \selectfont
 
 
 
