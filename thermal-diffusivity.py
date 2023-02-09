@@ -104,6 +104,7 @@ def fitting_function(time, m, A, offset):
     #solid measurements and controlled data with uncertainties
 radius_inner = 6.38  #in mm 
 radius_uncertainty = 0.01 #mm - systematic
+radius_outer=15.85
 
 omega1 = 2*np.pi/120
 omega2 = 2*np.pi/90
@@ -168,48 +169,47 @@ if __name__ == "__main__":
 
         radius = radius_inner
         #print(len(trial1[1]), np.shape(trial1_error))
-
             #first frequency
         omega = omega1
 
-        axs[0].set_title('Trial 1 - 120s Period, Low Inital $T_I$')
-        axs[0].set_ylabel('Temperature ($^\circ$C)')
+        axs[0].set_title('Trial 1 - 120s Period, Low Inital $T_I$', **tfont)
+        axs[0].set_ylabel('Temperature ($^\circ$C)', **afont)
         axs[0].plot(trial1[0], trial1[1], label='$T_I$')
         axs[0].plot(trial1[0], trial1[2], label='$T_S$')
         axs[0].errorbar(trial1[0], trial1[1], xerr = time_uncertainty, yerr=trial1_error,  label='Temperature $T_I$ Error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         axs[0].errorbar(trial1[0], trial1[2], xerr = time_uncertainty, yerr=trial1_error,  label='Temperature $T_S$ Error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         popt1, pcov1 = op.curve_fit(fitting_function, trial1[0], trial1[1], p0s[0])
         axs[0].plot(trial1[0], fitting_function(trial1[0], *popt1) +10*np.sin(trial1[0]/400) -5, label='Temperature Curve Fit' )  
-        axs[0].legend(loc='upper right', prop={'size':6})
+        axs[0].legend(loc='upper right', prop={'size':12})
 
             #second frequency
         omega=omega2
 
-        axs[1].set_title('Trial 2 - 90s Period, Low Initial $T_I$')
-        axs[1].set_ylabel('Temperature ($^\circ$C)')
+        axs[1].set_title('Trial 2 - 90s Period, Low Initial $T_I$', **tfont)
+        axs[1].set_ylabel('Temperature ($^\circ$C)', **afont)
         axs[1].plot(trial2[0], trial2[1], label='$T_I$')
         axs[1].plot(trial2[0], trial2[2], label='$T_S$')
         axs[1].errorbar(trial2[0], trial2[1], xerr = time_uncertainty, yerr=trial2_error,  label='Temperature $T_I$ Error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         axs[1].errorbar(trial2[0], trial2[2], xerr = time_uncertainty, yerr=trial2_error,  label='Temperature $T_S$ Error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         popt2, pcov2 = op.curve_fit(fitting_function, trial2[0], trial2[1], p0s[1])
         axs[1].plot(trial2[0], fitting_function(trial2[0]-6, *popt2) +14*np.sin(trial2[0]/400) -5, label='Temperature Curve Fit' )  
-        axs[1].legend(loc='upper right', prop={'size':6})
+        axs[1].legend(loc='upper right', prop={'size':12})
 
 
 
              #third frequency
         omega=omega3
 
-        axs[2].set_title('Trial 3 - 120s Period, High Initial $T_I$')
-        axs[2].set_xlabel('Time (S)')
-        axs[2].set_ylabel('Temperature ($^\circ$C)')
+        axs[2].set_title('Trial 3 - 120s Period, High Initial $T_I$', **tfont)
+        axs[2].set_xlabel('Time (S)', **afont)
+        axs[2].set_ylabel('Temperature ($^\circ$C)', **afont)
         axs[2].plot(trial3[0], trial3[1], label='$T_I$')
         axs[2].plot(trial3[0], trial3[2], label='$T_S$')
         axs[2].errorbar(trial3[0], trial3[1], xerr = time_uncertainty, yerr=trial3_error,  label='Temperature $T_I$ Error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         axs[2].errorbar(trial3[0], trial3[2], xerr = time_uncertainty, yerr=trial3_error,  label='Temperature $T_S$ Error', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
         popt3, pcov3 = op.curve_fit(fitting_function, trial3[0][20:70], trial3[1][20:70], p0s[2])
         axs[2].plot(trial3[0], fitting_function(trial3[0], *popt3) -13*np.sin(trial3[0]/400)+10 , label='Temperature Curve Fit' )  
-        axs[2].legend(loc='upper right', prop={'size':6})
+        axs[2].legend(loc='upper right', prop={'size':12})
 
 
 
@@ -289,8 +289,8 @@ ax1.plot(trial1[0], fitting_function(trial1[0], popt1[0]+np.max(pcov1[0]), popt1
 ax1.plot(trial1[0], fitting_function(trial1[0], popt1[0]-np.max(pcov1[0]), popt1[1]-np.max(pcov1[1]), popt1[2]-np.max(pcov1[2])) +10*np.sin(trial1[0]/400) -5, label='Minimal Temperature Error', color='r', alpha=0.5 )  
 ax1.set_xlim(110, 620)
 ax1.legend(loc='best', prop={'size':6})
-ax1.set_title('Trial 1 - Uncertainties of Optimal Fitting Parameters')
-ax1.set_ylabel('Temperature ($^\circ$C)')
+ax1.set_title('Trial 1 - Uncertainties of Optimal Fitting Parameters', **tfont)
+ax1.set_ylabel('Temperature ($^\circ$C)', **afont)
 
 #ax2.plot(trial1[0], trial1[1]-fitting_function(trial1[0], *popt1) +10*np.sin(trial1[0]/400) -5, label='Curve Fit Difference')
 ax2.errorbar(trial1[0], np.zeros(len(trial1[0])), xerr = time_uncertainty, yerr=2,  label='Temperature $T_I$ Error Overlap', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
@@ -298,7 +298,7 @@ ax2.plot(trial1[0], trial1[1]-n1_fit_maximalerror, label='Maximal Error Differen
 ax2.plot(trial1[0], trial1[1]-n1_fit_minimalerror, label='Minimal Error Difference', color='#FFBF00')
 ax2.set_xlim(110, 620)
 ax2.legend(loc='best', prop={'size':6})
-ax2.set_title('Trial 1 - Overlap of Parameter Uncertainty with Data Error')
+ax2.set_title('Trial 1 - Overlap of Parameter Uncertainty with Data Error', **tfont)
 
 
 
@@ -311,8 +311,8 @@ ax3.plot(trial2[0], fitting_function(trial2[0]-6, popt2[0]+np.max(pcov2[0]), pop
 ax3.plot(trial2[0], fitting_function(trial2[0]-6, popt2[0]-np.max(pcov2[0]), popt2[1]-np.max(pcov2[1]), popt2[2]-np.max(pcov2[2])) +14*np.sin(trial2[0]/400) -5, label='Minimal Temperature Error', color='r', alpha=0.5 )  
 ax3.set_xlim(105, 460)
 ax3.legend(loc='best', prop={'size': 6})
-ax3.set_title('Trial 2 - Uncertainties of Optimal Fitting Parameters')
-ax3.set_ylabel('Temperature ($^\circ$C)')
+ax3.set_title('Trial 2 - Uncertainties of Optimal Fitting Parameters', **tfont)
+ax3.set_ylabel('Temperature ($^\circ$C)', **afont)
 
 #ax4.plot(trial2[0], trial2[1]-fitting_function(trial2[0], *popt2) +14*np.sin(trial2[0]/400) -5, label='Curve Fit Difference')
 ax4.errorbar(trial2[0],np.zeros(len(trial2[0])), xerr = time_uncertainty, yerr=2,  label='Temperature $T_I$ Error Overlap', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
@@ -320,7 +320,7 @@ ax4.plot(trial2[0], trial2[1]-n2_fit_maximalerror, label='Maximal Error Differen
 ax4.plot(trial2[0], trial2[1]-n2_fit_minimalerror, label='Minimal Error Difference', color='#FFBF00')
 ax4.set_xlim(105, 460)
 ax4.legend(loc='best', prop={'size': 6})
-ax4.set_title('Trial 2 - Overlap of Parameter Uncertainty with Data Error')
+ax4.set_title('Trial 2 - Overlap of Parameter Uncertainty with Data Error', **tfont)
 
 
 
@@ -333,9 +333,9 @@ ax5.plot(trial3[0], fitting_function(trial3[0], popt3[0]+np.max(pcov3[0]), popt3
 ax5.plot(trial3[0], fitting_function(trial3[0], popt3[0]-np.max(pcov3[0]), popt3[1]-np.max(pcov3[1]), popt3[2]-np.max(pcov3[2])) -13*np.sin(trial3[0]/400)+10, label='Minimal Temperature Error', color='r', alpha=0.5 )  
 ax5.set_xlim(200, 700)
 ax5.legend(loc='best', prop={'size': 6})
-ax5.set_title('Trial 3 - Uncertainties of Optimal Fitting Parameters')
-ax5.set_xlabel('Time (s)')
-ax5.set_ylabel('Temperature ($^\circ$C)')
+ax5.set_title('Trial 3 - Uncertainties of Optimal Fitting Parameters', **tfont)
+ax5.set_xlabel('Time (s)', **afont)
+ax5.set_ylabel('Temperature ($^\circ$C)', **afont)
 
 #ax6.plot(trial3[0], trial3[1]-fitting_function(trial3[0], *popt3) -13*np.sin(trial3[0]/400)+10, label='Curve Fit Difference')
 ax6.errorbar(trial3[0], np.zeros(len(trial3[0])), xerr = time_uncertainty, yerr=2,  label='Temperature $T_I$ Error Overlap', color='k', fmt='none', capsize=1, lw=0.5) #add our errorbars
@@ -343,8 +343,8 @@ ax6.plot(trial3[0], trial3[1]-n3_fit_maximalerror, label='Maximal Error Differen
 ax6.plot(trial3[0], trial3[1]-n3_fit_minimalerror, label='Minimal Error Difference', color='#FFBF00')
 ax6.set_xlim(200, 700)
 ax6.legend(loc='best', prop={'size': 6})
-ax6.set_title('Trial 3 - Overlap of Parameter Uncertainty with Data Error')
-ax6.set_xlabel('Time (s)')
+ax6.set_title('Trial 3 - Overlap of Parameter Uncertainty with Data Error', **tfont)
+ax6.set_xlabel('Time (s)', **afont)
 
 
 plt.subplots_adjust(hspace=0.3, wspace=0.1)
@@ -384,5 +384,5 @@ ax6.set_xlabel('Time (s)', **afont)
 ax6.set_ylabel('Temperature ($^\circ$C)', **afont)
 
 
-plt.subplots_adjust(hspace=0.4)
+plt.subplots_adjust(hspace=0.2)
 plt.show()

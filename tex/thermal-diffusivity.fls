@@ -1248,6 +1248,9 @@ INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/tex-gyre/ts1qpl.fd
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/tex-gyre/ts1qpl.fd
 INPUT /usr/local/texlive/2021/texmf-dist/tex/latex/tex-gyre/ts1qpl.fd
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/tex-gyre/ts1-qplr.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/tex-gyre/rm-qagr-sc.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/tex-gyre/rm-qagb-sc.tfm
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/calibration comparison.png
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/calibration comparison.png
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/calibration comparison.png
@@ -1258,9 +1261,20 @@ INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/un
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/uncertainty example.png
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/uncertainty example.png
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/uncertainty example.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/data plots.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/data plots.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/data plots.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/data plots.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/data plots.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/uncertainty data.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/uncertainty data.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/uncertainty data.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/uncertainty data.png
+INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/uncertainty data.png
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.aux
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.out
 INPUT /Users/jacealloway/Desktop/python/PHY324/PHY324_thermal_diffusivity/tex/thermal-diffusivity.out
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm-sc.enc
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-ts1.enc
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/enc/dvips/tex-gyre/q-rm.enc
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb
@@ -1272,6 +1286,7 @@ INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb
+INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/tex-gyre/qagb.pfb
 INPUT /usr/local/texlive/2021/texmf-dist/fonts/type1/public/tex-gyre/qagr.pfb
